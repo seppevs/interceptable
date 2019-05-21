@@ -1,6 +1,6 @@
 {
   "name": "interceptable",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Easily intercept calls to function properties",
   "engines": {
     "node": ">=8"
