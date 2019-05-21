@@ -26,7 +26,7 @@ const obj = {
   }
 };
 
-const interceptor = ({ fn, args }) => () => {
+const interceptor = ({ fn, args }) => {
   console.log(`BEFORE call to ${fn} with args ${args}`);
   return {
     onSuccess(result) {
@@ -55,7 +55,7 @@ const obj = {
   }
 };
 
-const interceptor = ({ fn, args }) => () => {
+const interceptor = ({ fn, args }) => {
   console.log(`BEFORE call to ${fn} with args ${args}`);
   return {
     onError(err) {
@@ -91,7 +91,7 @@ const obj = {
   }
 };
 
-const interceptor = ({ fn, args }) => () => {
+const interceptor = ({ fn, args }) => {
   console.log(`BEFORE call to ${fn} with args ${args}`);
   return {
     onSuccess(result) {
@@ -119,7 +119,7 @@ const obj = {
   }
 };
 
-const interceptor = ({ fn, args }) => () => {
+const interceptor = ({ fn, args }) => {
   console.log(`BEFORE call to ${fn} with args ${args}`);
   return {
     onError(result) {

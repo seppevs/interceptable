@@ -19,12 +19,11 @@ describe('interceptable', () => {
     doReturn(arg) {
       return `success-result-for-${arg}-${this.member}`;
     }
-
   }
 
   it('should be able to intercept the `fn` and `args` before the method is called, ' +
     'without providing an after interceptor', () => {
-    const interceptor = ({ fn, args }) => () => {
+    const interceptor = ({ fn, args }) => {
       expect(fn).toEqual('doReturn');
       expect(args).toEqual(['anArgument']);
     };
@@ -35,7 +34,7 @@ describe('interceptable', () => {
   });
 
   it('should be able to intercept success return', () => {
-    const interceptor = ({ fn, args }) => () => ({
+    const interceptor = ({ fn, args }) => ({
       onSuccess(result) {
         expect(fn).toEqual('doReturn');
         expect(args).toEqual(['anArgument']);
@@ -49,7 +48,7 @@ describe('interceptable', () => {
   });
 
   it('should be able to intercept error throw', () => {
-    const interceptor = ({ fn, args }) => () => ({
+    const interceptor = ({ fn, args }) => ({
       onError(err) {
         expect(fn).toEqual('doThrow');
         expect(args).toEqual(['anArgument']);
@@ -66,7 +65,7 @@ describe('interceptable', () => {
   });
 
   it('should be able to intercept success resolve', async () => {
-    const interceptor = ({ fn, args }) => () => ({
+    const interceptor = ({ fn, args }) => ({
       onSuccess(result) {
         expect(fn).toEqual('doResolve');
         expect(args).toEqual(['anArgument']);
@@ -80,7 +79,7 @@ describe('interceptable', () => {
   });
 
   it('should be able to intercept error reject', async () => {
-    const interceptor = ({ fn, args }) => () => ({
+    const interceptor = ({ fn, args }) => ({
       onError(err) {
         expect(fn).toEqual('doReject');
         expect(args).toEqual(['anArgument']);
@@ -97,7 +96,7 @@ describe('interceptable', () => {
   });
 
   it('should be possible to intercept before and after a method invocation', () => {
-    const interceptor = ({ fn, args }) => () => {
+    const interceptor = ({ fn, args }) => {
       expect(fn).toEqual('doReturn');
       expect(args).toEqual(['anArgument']);
       return {
@@ -115,7 +114,7 @@ describe('interceptable', () => {
   });
 
   it('should still be possible to get and set regular properties', () => {
-    const interceptor = () => () => {
+    const interceptor = () => {
       return {
         onSuccess() { },
       };
@@ -126,7 +125,7 @@ describe('interceptable', () => {
   });
 
   it('should be possible to have no after method call hooks', () => {
-    const interceptor = () => () => {
+    const interceptor = () => {
       return {
       };
     };
@@ -137,7 +136,7 @@ describe('interceptable', () => {
 
   it('should work with this', () => {
     const objFromClass = new MyClass('myMember');
-    const interceptor = ({ fn, args }) => () => ({
+    const interceptor = ({ fn, args }) => ({
       onSuccess(result) {
         expect(fn).toEqual('doReturn');
         expect(args).toEqual(['anArgument']);
