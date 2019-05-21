@@ -8,13 +8,14 @@ module.exports = (obj, beforeInterceptor) =>
       if (property instanceof Function) {
         return (...args) => {
           const afterInterceptor = beforeInterceptor({ fn, args })();
-          if (!isObject(afterInterceptor))  return property.apply(this, args);
+          const boundFunction = property.bind(obj);
+          if (!isObject(afterInterceptor))  return boundFunction.apply(this, args);
           const onSuccess = afterInterceptor.onSuccess || noop;
           const onError = afterInterceptor.onError || noop;
 
           let returnedResult;
           try {
-            returnedResult = property.apply(this, args);
+            returnedResult = boundFunction.apply(this, args);
           } catch (err) {
             onError(err);
             throw err;

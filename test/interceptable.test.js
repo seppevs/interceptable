@@ -11,6 +11,17 @@ describe('interceptable', () => {
     doReject: (arg) => Promise.reject(new Error(`error-result-for-${arg}`)),
   };
 
+  class MyClass {
+    constructor(member) {
+      this.member = member;
+    }
+
+    doReturn(arg) {
+      return `success-result-for-${arg}-${this.member}`;
+    }
+
+  }
+
   it('should be able to intercept the `fn` and `args` before the method is called, ' +
     'without providing an after interceptor', () => {
     const interceptor = ({ fn, args }) => () => {
@@ -122,6 +133,21 @@ describe('interceptable', () => {
     const interceptableObj = interceptable(obj, interceptor);
     const result = interceptableObj.doReturn('anArgument');
     expect(result).toEqual('success-result-for-anArgument');
+  });
+
+  it('should work with this', () => {
+    const objFromClass = new MyClass('myMember');
+    const interceptor = ({ fn, args }) => () => ({
+      onSuccess(result) {
+        expect(fn).toEqual('doReturn');
+        expect(args).toEqual(['anArgument']);
+        expect(result).toEqual('success-result-for-anArgument-myMember');
+      },
+    });
+    const interceptableObj = interceptable(objFromClass, interceptor);
+    const result = interceptableObj.doReturn('anArgument');
+    expect(result).toEqual('success-result-for-anArgument-myMember');
+    expect.assertions(4);
   });
 
 });
