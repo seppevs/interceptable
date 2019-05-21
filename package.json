@@ -5,6 +5,10 @@
   "engines": {
     "node": ">=8"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seppevs/interceptable.git"
+  },
   "main": "src/interceptable.js",
   "scripts": {
     "test": "jest --silent --coverage",
