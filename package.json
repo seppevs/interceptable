@@ -1,0 +1,66 @@
+{
+  "name": "interceptable",
+  "version": "0.0.1",
+  "description": "Easily intercept calls to function properties",
+  "engines": {
+    "node": ">=8"
+  },
+  "main": "src/interceptable.js",
+  "scripts": {
+    "test": "jest --silent --coverage",
+    "coveralls": "jest --silent --coverage --coverageReporters=text-lcov | coveralls",
+    "lint": "eslint --cache --fix src/ test/"
+  },
+  "keywords": [
+    "interceptable",
+    "intercept",
+    "interceptor",
+    "object",
+    "obj",
+    "method",
+    "function",
+    "proxy"
+  ],
+  "author": "Sebastian Van Sande",
+  "license": "MIT",
+  "devDependencies": {
+    "coveralls": "^3.0.3",
+    "jest": "^24.5.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018
+    }
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "node_modules/",
+      "test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "testEnvironment": "node"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}
